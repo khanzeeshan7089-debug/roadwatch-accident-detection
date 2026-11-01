@@ -1,0 +1,329 @@
+type _ImmutableObjectStorageRefillResult = 
+ record {
+   success: opt bool;
+   topped_up_amount: opt nat;
+ };
+type _ImmutableObjectStorageRefillInformation = record {
+                                                  proposed_top_up_amount:
+                                                   opt nat;};
+type _ImmutableObjectStorageCreateCertificateResult = 
+ record {
+   blob_hash: text;
+   method: text;
+ };
+type WeeklyAlertPoint = 
+ record {
+   count: nat;
+   week: text;
+ };
+type VideoSourceKind = 
+ variant {
+   rtspStream;
+   sample;
+   uploadedFile;
+ };
+type VerificationStatus = 
+ variant {
+   falseAlarm;
+   unverified;
+   verified;
+ };
+type VehicleClass = 
+ variant {
+   bus;
+   car;
+   motorcycle;
+   truck;
+ };
+type Value = 
+ variant {
+   "bool": bool;
+   float: float64;
+   "int": int;
+   "nat": nat;
+   "null";
+   "text": text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type Timestamp = int;
+type Settings = 
+ record {
+   confidenceThreshold: float64;
+   lastSampleLoadedAt: opt Timestamp;
+   sensitivity: float64;
+   simulationMode: bool;
+ };
+type RoadwatchError = 
+ variant {
+   invalidInput: text;
+   notAuthorized;
+   notFound: text;
+ };
+type Result__1 = 
+ variant {
+   err: Error;
+   ok;
+ };
+type Result = 
+ record {
+   hasMore: bool;
+   rows: vec vec Cell;
+ };
+type ResolutionStatus = 
+ variant {
+   resolved;
+   unresolved;
+ };
+type NotificationStatus = 
+ variant {
+   failed;
+   notified;
+   pending;
+ };
+type MutationResult = 
+ variant {
+   err: RoadwatchError;
+   ok;
+ };
+type MonitoringState = 
+ variant {
+   monitoring;
+   stopped;
+ };
+type MonitoringSession = 
+ record {
+   active: bool;
+   cameraId: CameraId;
+   frameCount: nat;
+   startedAt: Timestamp;
+   updatedAt: Timestamp;
+ };
+type LogId = nat;
+type IncidentStatus = 
+ variant {
+   falseAlarm;
+   potential;
+   resolved;
+   verified;
+ };
+type IncidentId = nat;
+type IncidentFilter = 
+ record {
+   cameraId: opt CameraId;
+   fromTime: opt Timestamp;
+   searchId: opt text;
+   status: opt IncidentStatus;
+   toTime: opt Timestamp;
+ };
+type IncidentDistributionPoint = 
+ record {
+   count: nat;
+   status: text;
+ };
+type Incident = 
+ record {
+   area: text;
+   cameraCode: text;
+   cameraId: CameraId;
+   confidence: opt float64;
+   detectedAt: Timestamp;
+   detectionSource: DetectionSource;
+   id: IncidentId;
+   latitude: float64;
+   longitude: float64;
+   resolutionStatus: ResolutionStatus;
+   roadName: text;
+   snapshotRef: opt text;
+   status: IncidentStatus;
+   summary: text;
+   verificationStatus: VerificationStatus;
+ };
+type ExternalBlob = blob;
+type Error = 
+ variant {
+   AmbiguousAttribute: record {
+                         field: text;
+                         sources: vec text;
+                       };
+   FrontendOriginMismatch: record {
+                             expected: vec text;
+                             got: text;
+                           };
+   FrontendOriginsNotConfigured;
+   MalformedCandid;
+   MissingField: text;
+   MixedSsoSources: record {
+                      otherKeys: vec text;
+                      ssoKeys: vec text;
+                    };
+   NoAttributes;
+   Stale: record {ageNs: nat;};
+   UnknownNonce;
+   UntrustedSsoSource: record {domain: text;};
+ };
+type EmergencyAlert = 
+ record {
+   cameraId: CameraId;
+   history: vec AlertHistoryEntry;
+   hospitalStatus: NotificationStatus;
+   id: AlertId;
+   incidentId: IncidentId;
+   location: text;
+   policeStatus: NotificationStatus;
+   raisedAt: Timestamp;
+   status: AlertStatus;
+ };
+type DetectionStatPoint = 
+ record {
+   count: nat;
+   vehicleClass: text;
+ };
+type DetectionSource = 
+ variant {
+   model;
+   simulated;
+ };
+type DetectionLog = 
+ record {
+   box: BoundingBox;
+   cameraId: CameraId;
+   confidence: float64;
+   detectedAt: Timestamp;
+   id: LogId;
+   simulated: bool;
+   vehicleClass: VehicleClass;
+ };
+type DashboardStats = 
+ record {
+   activeCameras: nat;
+   pendingAlerts: nat;
+   potentialAccidents: nat;
+   resolvedIncidents: nat;
+   totalCameras: nat;
+   vehiclesDetected: nat;
+ };
+type DailyDetectionPoint = 
+ record {
+   count: nat;
+   date: text;
+ };
+type ConnectionStatus = 
+ variant {
+   offline;
+   online;
+ };
+type Cell = 
+ record {
+   name: text;
+   value: Value;
+ };
+type CameraId = nat;
+type CameraActivityPoint = 
+ record {
+   cameraCode: text;
+   cameraId: CameraId;
+   detections: nat;
+   incidents: nat;
+ };
+type Camera = 
+ record {
+   area: text;
+   code: text;
+   connectionStatus: ConnectionStatus;
+   createdAt: Timestamp;
+   id: CameraId;
+   latitude: float64;
+   longitude: float64;
+   monitoringState: MonitoringState;
+   name: text;
+   roadName: text;
+   rtspUrl: text;
+   sourceKind: VideoSourceKind;
+   uploadedFileRef: opt ExternalBlob;
+ };
+type BoundingBox = 
+ record {
+   height: float64;
+   width: float64;
+   x: float64;
+   y: float64;
+ };
+type Analytics = 
+ record {
+   cameraActivity: vec CameraActivityPoint;
+   dailyDetections: vec DailyDetectionPoint;
+   detectionStats: vec DetectionStatPoint;
+   incidentDistribution: vec IncidentDistributionPoint;
+   weeklyAlerts: vec WeeklyAlertPoint;
+ };
+type AlertStatus = 
+ variant {
+   acknowledged;
+   active;
+   resolved;
+ };
+type AlertId = nat;
+type AlertHistoryEntry = 
+ record {
+   at: Timestamp;
+   note: text;
+   status: AlertStatus;
+ };
+service : {
+  _immutableObjectStorageBlobsAreLive: (hashes: vec blob) -> (vec bool) query;
+  _immutableObjectStorageBlobsToDelete: () -> (vec blob) query;
+  _immutableObjectStorageConfirmBlobDeletion: (blobs: vec blob) -> ();
+  _immutableObjectStorageCreateCertificate: (blobHash: text) ->
+   (_ImmutableObjectStorageCreateCertificateResult);
+  _immutableObjectStorageRefillCashier: (refillInformation:
+   opt _ImmutableObjectStorageRefillInformation) ->
+   (_ImmutableObjectStorageRefillResult);
+  _immutableObjectStorageUpdateGatewayPrincipals: () -> ();
+  _initialize_access_control: () -> ();
+  _internet_identity_sign_in_finish: () -> (Result__1);
+  _internet_identity_sign_in_start: () -> (blob);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  createCamera: (name: text, roadName: text, area: text, latitude: float64,
+   longitude: float64, rtspUrl: text, sourceKind: VideoSourceKind,
+   uploadedFileRef: opt ExternalBlob) -> (MutationResult);
+  deleteCamera: (id: CameraId) -> (MutationResult);
+  execute: (qJson: text) -> (Result) query;
+  generateAccidentEvent: (cameraId: CameraId, confidence: opt float64,
+   summary: text, snapshotRef: opt text) -> (MutationResult);
+  getAnalytics: () -> (Analytics) query;
+  getApiDoc: () -> (text) query;
+  getCallerUserRole: () -> (UserRole) query;
+  getDashboardStats: () -> (DashboardStats) query;
+  getDetectionCount: (cameraId: CameraId) -> (nat) query;
+  getFrameCount: (cameraId: CameraId) -> (nat) query;
+  getIncident: (id: IncidentId) -> (opt Incident) query;
+  getMonitoringSession: (cameraId: CameraId) -> (opt MonitoringSession) query;
+  getSettings: () -> (Settings) query;
+  isCallerAdmin: () -> (bool) query;
+  listAlerts: () -> (vec EmergencyAlert) query;
+  listCameras: () -> (vec Camera) query;
+  listDetections: (cameraId: CameraId) -> (vec DetectionLog) query;
+  listIncidents: (filter: IncidentFilter) -> (vec Incident) query;
+  loadSampleData: () -> (MutationResult);
+  recordDetection: (cameraId: CameraId, vehicleClass: VehicleClass,
+   confidence: float64, box: BoundingBox, simulated: bool) ->
+   (MutationResult);
+  reportFrameCount: (cameraId: CameraId, frameCount: nat) -> (MutationResult);
+  schema: () -> (text) query;
+  setCameraSource: (id: CameraId, sourceKind: VideoSourceKind, rtspUrl: 
+   text, uploadedFileRef: opt ExternalBlob) -> (MutationResult);
+  startMonitoring: (id: CameraId) -> (MutationResult);
+  startMonitoringSession: (cameraId: CameraId) -> (MutationResult);
+  stopMonitoring: (id: CameraId) -> (MutationResult);
+  stopMonitoringSession: (cameraId: CameraId) -> (MutationResult);
+  updateAlertStatus: (id: AlertId, status: AlertStatus) -> (MutationResult);
+  updateCamera: (camera: Camera) -> (MutationResult);
+  updateIncidentStatus: (id: IncidentId, verification: VerificationStatus,
+   resolution: ResolutionStatus) -> (MutationResult);
+  updateSettings: (settings: Settings) -> (MutationResult);
+}

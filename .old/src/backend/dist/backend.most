@@ -1,0 +1,390 @@
+// Version: 4.0.0
+type AccessControlState__201339279 =
+  {
+    var adminAssigned : Bool;
+    userRoles : Map__230067015<Principal, UserRole__91647283>
+  };
+type AlertHistoryEntry__255645795 =
+  {at : Timestamp__948146615; note : Text; status : AlertStatus__755399155};
+type AlertHistoryEntry__257372445 =
+  {at : Timestamp__771871407; note : Text; status : AlertStatus__987860294};
+type AlertHistoryEntry__912180811 =
+  {at : Timestamp__301639476; note : Text; status : AlertStatus__379500222};
+type AlertId__43128661 = Nat;
+type AlertId__758494499 = Nat;
+type AlertId__97238887 = Nat;
+type AlertStatus__379500222 = {#acknowledged; #active; #resolved};
+type AlertStatus__755399155 = {#acknowledged; #active; #resolved};
+type AlertStatus__987860294 = {#acknowledged; #active; #resolved};
+type BoundingBox__189350080 =
+  {height : Float; width : Float; x : Float; y : Float};
+type BoundingBox__850096130 =
+  {height : Float; width : Float; x : Float; y : Float};
+type BoundingBox__901473167 =
+  {height : Float; width : Float; x : Float; y : Float};
+type CameraId__510093712 = Nat;
+type CameraId__869461400 = Nat;
+type CameraId__90489995 = Nat;
+type Camera__1064285279 =
+  {
+    area : Text;
+    code : Text;
+    connectionStatus : ConnectionStatus__469855131;
+    createdAt : Timestamp__771871407;
+    id : CameraId__90489995;
+    latitude : Float;
+    longitude : Float;
+    monitoringState : MonitoringState__835707899;
+    name : Text;
+    roadName : Text;
+    rtspUrl : Text;
+    sourceKind : VideoSourceKind__227745880;
+    uploadedFileRef : ?Blob
+  };
+type Camera__474969427 =
+  {
+    area : Text;
+    code : Text;
+    connectionStatus : ConnectionStatus__1022222714;
+    createdAt : Timestamp__301639476;
+    id : CameraId__510093712;
+    latitude : Float;
+    longitude : Float;
+    monitoringState : MonitoringState__826144215;
+    name : Text;
+    roadName : Text;
+    rtspUrl : Text;
+    sourceKind : VideoSourceKind__337985359;
+    uploadedFileRef : ?ExternalBlob__220559234
+  };
+type Camera__831816539 =
+  {
+    area : Text;
+    code : Text;
+    connectionStatus : ConnectionStatus__780561199;
+    createdAt : Timestamp__948146615;
+    id : CameraId__869461400;
+    latitude : Float;
+    longitude : Float;
+    monitoringState : MonitoringState__1024585770;
+    name : Text;
+    roadName : Text;
+    rtspUrl : Text;
+    sourceKind : VideoSourceKind__836305156;
+    uploadedFileRef : ?Blob
+  };
+type ConnectionStatus__1022222714 = {#offline; #online};
+type ConnectionStatus__469855131 = {#offline; #online};
+type ConnectionStatus__780561199 = {#offline; #online};
+type Data__44217153<K, V> = {var count : Nat__227979830; kvs : [var ?(K, V)]};
+type DetectionLog__507247996 =
+  {
+    box : BoundingBox__850096130;
+    cameraId : CameraId__510093712;
+    confidence : Float;
+    detectedAt : Timestamp__301639476;
+    id : LogId__472453763;
+    simulated : Bool;
+    vehicleClass : VehicleClass__491836426
+  };
+type DetectionLog__550085753 =
+  {
+    box : BoundingBox__189350080;
+    cameraId : CameraId__90489995;
+    confidence : Float;
+    detectedAt : Timestamp__771871407;
+    id : LogId__328953377;
+    simulated : Bool;
+    vehicleClass : VehicleClass__940351866
+  };
+type DetectionLog__643377878 =
+  {
+    box : BoundingBox__901473167;
+    cameraId : CameraId__869461400;
+    confidence : Float;
+    detectedAt : Timestamp__948146615;
+    id : LogId__985332973;
+    simulated : Bool;
+    vehicleClass : VehicleClass__239796223
+  };
+type DetectionSource__549065090 = {#model; #simulated};
+type DetectionSource__549999439 = {#model; #simulated};
+type DetectionSource__594790609 = {#model; #simulated};
+type EmergencyAlert__218454005 =
+  {
+    cameraId : CameraId__869461400;
+    history : [AlertHistoryEntry__255645795];
+    hospitalStatus : NotificationStatus__1056574966;
+    id : AlertId__43128661;
+    incidentId : IncidentId__927634744;
+    location : Text;
+    policeStatus : NotificationStatus__1056574966;
+    raisedAt : Timestamp__948146615;
+    status : AlertStatus__755399155
+  };
+type EmergencyAlert__591283093 =
+  {
+    cameraId : CameraId__90489995;
+    history : [AlertHistoryEntry__257372445];
+    hospitalStatus : NotificationStatus__175728285;
+    id : AlertId__97238887;
+    incidentId : IncidentId__768506250;
+    location : Text;
+    policeStatus : NotificationStatus__175728285;
+    raisedAt : Timestamp__771871407;
+    status : AlertStatus__987860294
+  };
+type EmergencyAlert__798753826 =
+  {
+    cameraId : CameraId__510093712;
+    history : [AlertHistoryEntry__912180811];
+    hospitalStatus : NotificationStatus__1011778414;
+    id : AlertId__758494499;
+    incidentId : IncidentId__610298952;
+    location : Text;
+    policeStatus : NotificationStatus__1011778414;
+    raisedAt : Timestamp__301639476;
+    status : AlertStatus__379500222
+  };
+type ExternalBlob__220559234 = Blob;
+type IncidentId__610298952 = Nat;
+type IncidentId__768506250 = Nat;
+type IncidentId__927634744 = Nat;
+type IncidentStatus__148048376 =
+  {#falseAlarm; #potential; #resolved; #verified};
+type IncidentStatus__479118999 =
+  {#falseAlarm; #potential; #resolved; #verified};
+type IncidentStatus__96209201 =
+  {#falseAlarm; #potential; #resolved; #verified};
+type Incident__445774101 =
+  {
+    area : Text;
+    cameraCode : Text;
+    cameraId : CameraId__869461400;
+    confidence : ?Float;
+    detectedAt : Timestamp__948146615;
+    detectionSource : DetectionSource__549065090;
+    id : IncidentId__927634744;
+    latitude : Float;
+    longitude : Float;
+    resolutionStatus : ResolutionStatus__869813248;
+    roadName : Text;
+    snapshotRef : ?Text;
+    status : IncidentStatus__96209201;
+    summary : Text;
+    verificationStatus : VerificationStatus__806879682
+  };
+type Incident__629063041 =
+  {
+    area : Text;
+    cameraCode : Text;
+    cameraId : CameraId__510093712;
+    confidence : ?Float;
+    detectedAt : Timestamp__301639476;
+    detectionSource : DetectionSource__594790609;
+    id : IncidentId__610298952;
+    latitude : Float;
+    longitude : Float;
+    resolutionStatus : ResolutionStatus__633001792;
+    roadName : Text;
+    snapshotRef : ?Text;
+    status : IncidentStatus__148048376;
+    summary : Text;
+    verificationStatus : VerificationStatus__1042146990
+  };
+type Incident__867653184 =
+  {
+    area : Text;
+    cameraCode : Text;
+    cameraId : CameraId__90489995;
+    confidence : ?Float;
+    detectedAt : Timestamp__771871407;
+    detectionSource : DetectionSource__549999439;
+    id : IncidentId__768506250;
+    latitude : Float;
+    longitude : Float;
+    resolutionStatus : ResolutionStatus__95197373;
+    roadName : Text;
+    snapshotRef : ?Text;
+    status : IncidentStatus__479118999;
+    summary : Text;
+    verificationStatus : VerificationStatus__255743954
+  };
+type Internal__283199666<K, V> =
+  {children : [var ?Node__204828119<K, V>]; data : Data__44217153<K, V>};
+type Leaf__598469445<K, V> = {data : Data__44217153<K, V>};
+type List__355132335<T> =
+  {
+    var blockIndex : Nat__227979830;
+    var blocks : [var [var ?T]];
+    var elementIndex : Nat__227979830
+  };
+type List__836382695<T> = List__355132335<T>;
+type LogId__328953377 = Nat;
+type LogId__472453763 = Nat;
+type LogId__985332973 = Nat;
+type Map__230067015<K, V> = Map__405889023<K, V>;
+type Map__405889023<K, V> = Map__603270868<K, V>;
+type Map__603270868<K, V> =
+  {var root : Node__204828119<K, V>; var size : Nat__227979830};
+type MonitoringSession__1065991283 =
+  {
+    active : Bool;
+    cameraId : CameraId__510093712;
+    frameCount : Nat;
+    startedAt : Timestamp__301639476;
+    updatedAt : Timestamp__301639476
+  };
+type MonitoringSession__728723987 =
+  {
+    active : Bool;
+    cameraId : CameraId__869461400;
+    frameCount : Nat;
+    startedAt : Timestamp__948146615;
+    updatedAt : Timestamp__948146615
+  };
+type MonitoringState__1024585770 = {#monitoring; #stopped};
+type MonitoringState__826144215 = {#monitoring; #stopped};
+type MonitoringState__835707899 = {#monitoring; #stopped};
+type Nat__227979830 = Nat__920180692;
+type Nat__920180692 = Nat;
+type NewActor__609810833 =
+  {
+    accessControlState : AccessControlState__201339279;
+    alerts : Map__230067015<AlertId__43128661, EmergencyAlert__218454005>;
+    cameras : Map__230067015<CameraId__869461400, Camera__831816539>;
+    counters :
+      {
+        var nextAlertId : Nat;
+        var nextCameraId : Nat;
+        var nextIncidentId : Nat;
+        var nextLogId : Nat
+      };
+    detectionLogs : List__836382695<DetectionLog__643377878>;
+    incidents : Map__230067015<IncidentId__927634744, Incident__445774101>;
+    monitoringSessions :
+      Map__230067015<CameraId__869461400, MonitoringSession__728723987>;
+    settings : {var value : Settings__822283619}
+  };
+type NewActor__769816496 =
+  {
+    accessControlState : AccessControlState__201339279;
+    alerts : Map__230067015<AlertId__97238887, EmergencyAlert__591283093>;
+    cameras : Map__230067015<CameraId__90489995, Camera__1064285279>;
+    counters :
+      {
+        var nextAlertId : Nat;
+        var nextCameraId : Nat;
+        var nextIncidentId : Nat;
+        var nextLogId : Nat
+      };
+    detectionLogs : List__836382695<DetectionLog__550085753>;
+    incidents : Map__230067015<IncidentId__768506250, Incident__867653184>;
+    settings : {var value : Settings__637630088}
+  };
+type Node__204828119<K, V> =
+  {#internal : Internal__283199666<K, V>; #leaf : Leaf__598469445<K, V>};
+type NotificationStatus__1011778414 = {#failed; #notified; #pending};
+type NotificationStatus__1056574966 = {#failed; #notified; #pending};
+type NotificationStatus__175728285 = {#failed; #notified; #pending};
+type OldActor__512397517 = {};
+type OldActor__752573179 =
+  {
+    accessControlState : AccessControlState__201339279;
+    alerts : Map__230067015<AlertId__43128661, EmergencyAlert__218454005>;
+    cameras : Map__230067015<CameraId__869461400, Camera__831816539>;
+    counters :
+      {
+        var nextAlertId : Nat;
+        var nextCameraId : Nat;
+        var nextIncidentId : Nat;
+        var nextLogId : Nat
+      };
+    detectionLogs : List__836382695<DetectionLog__643377878>;
+    incidents : Map__230067015<IncidentId__927634744, Incident__445774101>;
+    settings : {var value : Settings__822283619}
+  };
+type ResolutionStatus__633001792 = {#resolved; #unresolved};
+type ResolutionStatus__869813248 = {#resolved; #unresolved};
+type ResolutionStatus__95197373 = {#resolved; #unresolved};
+type Settings__637630088 =
+  {
+    confidenceThreshold : Float;
+    lastSampleLoadedAt : ?Timestamp__771871407;
+    sensitivity : Float;
+    simulationMode : Bool
+  };
+type Settings__822283619 =
+  {
+    confidenceThreshold : Float;
+    lastSampleLoadedAt : ?Timestamp__948146615;
+    sensitivity : Float;
+    simulationMode : Bool
+  };
+type Settings__910680296 =
+  {
+    confidenceThreshold : Float;
+    lastSampleLoadedAt : ?Timestamp__301639476;
+    sensitivity : Float;
+    simulationMode : Bool
+  };
+type Timestamp__301639476 = Int;
+type Timestamp__771871407 = Int;
+type Timestamp__948146615 = Int;
+type UserRole__91647283 = {#admin; #guest; #user};
+type VehicleClass__239796223 = {#bus; #car; #motorcycle; #truck};
+type VehicleClass__491836426 = {#bus; #car; #motorcycle; #truck};
+type VehicleClass__940351866 = {#bus; #car; #motorcycle; #truck};
+type VerificationStatus__1042146990 = {#falseAlarm; #unverified; #verified};
+type VerificationStatus__255743954 = {#falseAlarm; #unverified; #verified};
+type VerificationStatus__806879682 = {#falseAlarm; #unverified; #verified};
+type VideoSourceKind__227745880 = {#rtspStream; #sample; #uploadedFile};
+type VideoSourceKind__337985359 = {#rtspStream; #sample; #uploadedFile};
+type VideoSourceKind__836305156 = {#rtspStream; #sample; #uploadedFile};
+{
+  "00000000_000000" : OldActor__512397517 -> NewActor__769816496;
+  "20261101_120000" : (old : OldActor__752573179) -> NewActor__609810833
+}
+actor  {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__230067015<Principal, UserRole__91647283>
+    };
+  stable alerts :
+    {
+      var root :
+        Node__204828119<AlertId__758494499, EmergencyAlert__798753826>;
+      var size : Nat__227979830
+    };
+  stable cameras :
+    {
+      var root : Node__204828119<CameraId__510093712, Camera__474969427>;
+      var size : Nat__227979830
+    };
+  stable counters :
+    {
+      var nextAlertId : Nat;
+      var nextCameraId : Nat;
+      var nextIncidentId : Nat;
+      var nextLogId : Nat
+    };
+  stable detectionLogs :
+    {
+      var blockIndex : Nat__227979830;
+      var blocks : [var [var ?DetectionLog__507247996]];
+      var elementIndex : Nat__227979830
+    };
+  stable incidents :
+    {
+      var root : Node__204828119<IncidentId__610298952, Incident__629063041>;
+      var size : Nat__227979830
+    };
+  stable monitoringSessions :
+    {
+      var root :
+        Node__204828119<CameraId__510093712, MonitoringSession__1065991283>;
+      var size : Nat__227979830
+    };
+  stable settings : {var value : Settings__910680296}
+};

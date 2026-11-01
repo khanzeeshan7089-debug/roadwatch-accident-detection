@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/SpaceGrotesk.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("/assets/fonts/DMSans.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/JetBrainsMono.woff2") format("woff2");
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --font-display: "Space Grotesk", sans-serif;
+    --font-body: "DM Sans", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+    --radius: 0.5rem;
+
+    /* Dark control-room theme is the primary and only mode. */
+    --background: 0.14 0.018 258;
+    --foreground: 0.95 0.008 240;
+    --card: 0.185 0.022 258;
+    --card-foreground: 0.95 0.008 240;
+    --popover: 0.2 0.024 258;
+    --popover-foreground: 0.95 0.008 240;
+
+    /* Electric blue — primary action / brand */
+    --primary: 0.62 0.2 255;
+    --primary-foreground: 0.98 0.005 255;
+
+    --secondary: 0.24 0.026 258;
+    --secondary-foreground: 0.88 0.008 240;
+    --muted: 0.24 0.026 258;
+    --muted-foreground: 0.6 0.012 245;
+
+    /* Cyan — secondary accent / active states */
+    --accent: 0.78 0.15 195;
+    --accent-foreground: 0.14 0.018 258;
+
+    /* Red — accident warning */
+    --destructive: 0.58 0.22 25;
+    --destructive-foreground: 0.98 0.005 25;
+
+    /* Green — camera online / success */
+    --success: 0.72 0.17 150;
+    --success-foreground: 0.14 0.018 150;
+    /* Amber — warning / simulated */
+    --warning: 0.78 0.15 80;
+    --warning-foreground: 0.16 0.02 80;
+
+    --border: 0.3 0.026 258;
+    --input: 0.3 0.026 258;
+    --ring: 0.62 0.2 255;
+
+    --chart-1: 0.62 0.2 255;
+    --chart-2: 0.78 0.15 195;
+    --chart-3: 0.72 0.17 150;
+    --chart-4: 0.58 0.22 25;
+    --chart-5: 0.78 0.15 80;
+
+    --sidebar: 0.16 0.02 258;
+    --sidebar-foreground: 0.9 0.008 240;
+    --sidebar-primary: 0.62 0.2 255;
+    --sidebar-primary-foreground: 0.98 0.005 255;
+    --sidebar-accent: 0.24 0.026 258;
+    --sidebar-accent-foreground: 0.95 0.008 240;
+    --sidebar-border: 0.28 0.026 258;
+    --sidebar-ring: 0.62 0.2 255;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.62 0.2 255),
+      oklch(0.72 0.16 210)
+    );
+    --gradient-subtle: linear-gradient(
+      180deg,
+      oklch(0.185 0.022 258),
+      oklch(0.16 0.02 258)
+    );
+    --gradient-danger: linear-gradient(
+      135deg,
+      oklch(0.58 0.22 25),
+      oklch(0.62 0.2 10)
+    );
+
+    /* Base transition */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  .font-mono-num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+  .gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+  .gradient-subtle {
+    background-image: var(--gradient-subtle);
+  }
+  .gradient-danger {
+    background-image: var(--gradient-danger);
+  }
+  .text-gradient-primary {
+    background-image: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  /* Subtle grid texture for control-room surfaces */
+  .bg-grid {
+    background-image: linear-gradient(
+        to right,
+        oklch(0.3 0.026 258 / 0.35) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        oklch(0.3 0.026 258 / 0.35) 1px,
+        transparent 1px
+      );
+    background-size: 32px 32px;
+  }
+  /* Live indicator pulse for status dots */
+  .status-pulse {
+    animation: status-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+@keyframes status-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-4rem);
+  }
+  100% {
+    transform: translateY(calc(100% + 4rem));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-pulse,
+  [class*="animate-[scan"] {
+    animation: none !important;
+  }
+}

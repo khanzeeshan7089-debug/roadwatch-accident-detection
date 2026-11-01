@@ -1,0 +1,20 @@
+{
+  "overview": "A dark control-room traffic surveillance dashboard for monitoring cameras, reviewing uploaded traffic video, tracking detections and managing accident incidents and emergency alerts.",
+  "features": [
+    "Live CCTV monitoring panel that plays a camera's uploaded MP4/AVI clip with full playback controls",
+    "Honest frame and vehicle counters driven by real playback and stored detection logs",
+    "Simulated vehicle detection boxes and accident analysis, clearly labelled as simulated",
+    "Incident records with camera ID, location and timestamp",
+    "Emergency alert dashboard with police and hospital notification status",
+    "Camera, incident, alert, analytics and location management pages"
+  ],
+  "category": "dashboard",
+  "tags": [
+    "traffic",
+    "surveillance",
+    "monitoring",
+    "dashboard",
+    "video"
+  ],
+  "last_updated": "2026-11-01T21:09:29.817Z"
+}
